@@ -117,12 +117,10 @@ void AutomatableModelView::addDefaultActions( QMenu* menu )
 			controllerTxt = AutomatableModel::tr( "Connected to controller" );
 		}
 
-		QMenu* contMenu = menu->addMenu( embed::getIconPixmap( "controller" ), controllerTxt );
-
-		contMenu->addAction( embed::getIconPixmap( "controller" ),
+		menu->addAction( embed::getIconPixmap( "controller" ),
 								AutomatableModel::tr("Edit connection..."),
 								amvSlots, SLOT( execConnectionDialog() ) );
-		contMenu->addAction( embed::getIconPixmap( "cancel" ),
+		menu->addAction( embed::getIconPixmap( "cancel" ),
 								AutomatableModel::tr("Remove connection"),
 								amvSlots, SLOT( removeConnection() ) );
 	}
