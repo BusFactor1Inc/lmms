@@ -100,7 +100,7 @@ public:
 		for( MidiPort::Map::ConstIterator it = map.begin(); it != map.end(); ++it )
 		{
 			m_midiPort.subscribeReadablePort( it.key(),
-									m_detectedMidiPort.isEmpty() || ( it.key() == m_detectedMidiPort ) );
+                                                          m_detectedMidiPort.isEmpty() || ( it.key() == m_detectedMidiPort ) );
 		}
 	}
 
@@ -127,7 +127,7 @@ ControllerConnectionDialog::ControllerConnectionDialog( QWidget * _parent,
 		const AutomatableModel * _target_model ) :
 	QDialog( _parent ),
 	m_readablePorts( NULL ),
-	m_midiAutoDetect( false ),
+	m_midiAutoDetect( true ),
 	m_controller( NULL ),
 	m_targetModel( _target_model ),
 	m_midiController( NULL )
