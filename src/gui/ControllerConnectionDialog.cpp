@@ -417,6 +417,7 @@ void ControllerConnectionDialog::midiValueChanged()
 		{
 			m_readablePorts->updateMenu();
 		}
+                selectController();
 	}
 }
 
