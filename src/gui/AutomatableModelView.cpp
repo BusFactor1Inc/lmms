@@ -63,6 +63,33 @@ void AutomatableModelView::addDefaultActions( QMenu* menu )
 
 	AutomatableModelViewSlots* amvSlots = new AutomatableModelViewSlots( this, menu );
 
+	QString controllerTxt;
+	if( model->controllerConnection() )
+	{
+		Controller* cont = model->controllerConnection()->getController();
+		if( cont )
+		{
+			controllerTxt = AutomatableModel::tr( "Connected to %1" ).arg( cont->name() );
+		}
+		else
+		{
+			controllerTxt = AutomatableModel::tr( "Connected to controller" );
+		}
+
+		menu->addAction( embed::getIconPixmap( "cancel" ),
+								AutomatableModel::tr("Remove connection"),
+								amvSlots, SLOT( removeConnection() ) );
+		menu->addAction( embed::getIconPixmap( "controller" ),
+								AutomatableModel::tr("Edit connection..."),
+								amvSlots, SLOT( execConnectionDialog() ) );
+	}
+	else
+	{
+		menu->addAction( embed::getIconPixmap( "controller" ),
+							AutomatableModel::tr("Connect to controller..."),
+							amvSlots, SLOT( execConnectionDialog() ) );
+	}
+
 	menu->addAction( embed::getIconPixmap( "reload" ),
 						AutomatableModel::tr( "&Reset (%1%2)" ).
 							arg( model->displayValue( model->initValue<float>() ) ).
@@ -104,32 +131,6 @@ void AutomatableModelView::addDefaultActions( QMenu* menu )
 		menu->addSeparator();
 	}
 
-	QString controllerTxt;
-	if( model->controllerConnection() )
-	{
-		Controller* cont = model->controllerConnection()->getController();
-		if( cont )
-		{
-			controllerTxt = AutomatableModel::tr( "Connected to %1" ).arg( cont->name() );
-		}
-		else
-		{
-			controllerTxt = AutomatableModel::tr( "Connected to controller" );
-		}
-
-		menu->addAction( embed::getIconPixmap( "controller" ),
-								AutomatableModel::tr("Edit connection..."),
-								amvSlots, SLOT( execConnectionDialog() ) );
-		menu->addAction( embed::getIconPixmap( "cancel" ),
-								AutomatableModel::tr("Remove connection"),
-								amvSlots, SLOT( removeConnection() ) );
-	}
-	else
-	{
-		menu->addAction( embed::getIconPixmap( "controller" ),
-							AutomatableModel::tr("Connect to controller..."),
-							amvSlots, SLOT( execConnectionDialog() ) );
-	}
 }
 
 
